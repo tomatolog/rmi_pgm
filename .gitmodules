@@ -1,3 +1,9 @@
 [submodule "PGM-index"]
 	path = PGM-index
-	url = git@github.com:gvinciguerra/PGM-index.git
+	url = https://github.com/gvinciguerra/PGM-index.git
+[submodule "RadixSpline"]
+	path = RadixSpline
+	url = https://github.com/learnedsystems/RadixSpline.git
+[submodule "cpp-btree"]
+	path = cpp-btree
+	url = https://github.com/Kronuz/cpp-btree.git
