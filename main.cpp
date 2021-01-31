@@ -12,7 +12,7 @@
 #include "rmis/fb.h"
 #include "rmis/osm.h"
 #include "rmis/books.h"
-#include "PGM-index/include/pgm_index.hpp"
+#include "PGM-index/include/pgm/pgm_index.hpp"
 #include "RadixSpline/include/rs/multi_map.h"
 
 #include "btree.h"
@@ -253,7 +253,7 @@ void measure_perfomance() {
   // Test lookups for PGM.
 #ifdef BENCH_PGM
     auto pgm_build_start = timer::now();
-    PGMIndex<uint64_t, 64> index(dataset);
+    pgm::PGMIndex<uint64_t, 64> index(dataset);
     auto pgm_build_stop = timer::now();
     auto pgm_build_tm = std::chrono::duration_cast<std::chrono::microseconds>(pgm_build_stop - pgm_build_start).count();
 
@@ -261,7 +261,7 @@ void measure_perfomance() {
 
   tmPgm = query_time([&index, &dataset](auto x, auto correct_idx)
   {
-    auto approx_range = index.find_approximate_position(x);
+    auto approx_range = index.search(x);
 
 #ifdef BRANCHLESS
     auto lb_result = lower_bound_branchless(dataset.begin() + approx_range.lo, dataset.begin() + approx_range.hi, x);
